@@ -22,8 +22,14 @@ export default function useChat() {
         const messagesForAPI: Message[] = [...messages, { id: Date.now(), role: 'user', content }]
         setMessages(messagesForAPI)
         try {
-            const response = await provider.sendMessage(messagesForAPI)
-            setMessages([...messagesForAPI, { id: Date.now(), role: 'assistant', content: response }])
+            const response = provider.sendMessage(messagesForAPI)
+            setMessages([...messagesForAPI, { id: Date.now(), role: 'assistant', content: '' }])
+            for await (const chunk of response) {
+                setMessages(prev => {
+                    const lastMessage = prev[prev.length - 1]
+                    return [...prev.slice(0, -1), { ...lastMessage, content: lastMessage.content + chunk }]
+                })
+            }
         } catch (err) {
             setError('Failed to send message: ' + (err instanceof Error ? err.message : 'Unknown error'))
         } finally {
