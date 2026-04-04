@@ -16,6 +16,7 @@ export default function useChat() {
     }, [])
 
     const sendMessage = async (content:string) => {
+        if (loading) return
         setLoading(true)
         setError(null)
         const messagesForAPI: Message[] = [...messages, { id: Date.now(), role: 'user', content }]
