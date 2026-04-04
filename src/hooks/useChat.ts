@@ -19,11 +19,11 @@ export default function useChat() {
         if (loading) return
         setLoading(true)
         setError(null)
-        const messagesForAPI: Message[] = [...messages, { id: Date.now(), role: 'user', content }]
+        const messagesForAPI: Message[] = [...messages, { id: crypto.randomUUID(), role: 'user', content }]
         setMessages(messagesForAPI)
         try {
             const response = provider.sendMessage(messagesForAPI)
-            setMessages([...messagesForAPI, { id: Date.now(), role: 'assistant', content: '' }])
+            setMessages([...messagesForAPI, { id: crypto.randomUUID(), role: 'assistant', content: '' }])
             for await (const chunk of response) {
                 setMessages(prev => {
                     const lastMessage = prev[prev.length - 1]
