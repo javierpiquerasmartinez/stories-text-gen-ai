@@ -14,7 +14,7 @@ export default function ChatMessages({ messages }: ChatMessagesProps) {
   useEffect(() => {
     const pageRendered = anchorDiv.current && mainElement.current
     const shouldAlwaysScroll = messages.length > 0 && (messages[messages.length - 1].role === 'user' || (messages[messages.length - 1].role === 'assistant' && messages[messages.length - 1].content === '') )
-    const nearBottom = mainElement.current && (mainElement.current.scrollTop + mainElement.current.clientHeight >= mainElement.current.scrollHeight - 200)
+    const nearBottom = mainElement.current && (mainElement.current.scrollTop + mainElement.current.clientHeight >= mainElement.current.scrollHeight - 1000)
     if (pageRendered && (nearBottom || shouldAlwaysScroll)) {
         anchorDiv.current!.scrollIntoView({ behavior: 'smooth' })
     }
