@@ -3,6 +3,14 @@
 ## Propósito del Proyecto
 Este es un **proyecto de práctica y aprendizaje**. El objetivo es que el desarrollador (Javier) aprenda patrones de React, buenas prácticas de arquitectura y desarrollo profesional a través de la práctica guiada.
 
+## Excepción: Sub-agentes Especializados
+
+Los sub-agentes definidos en `.claude/agents/` tienen roles propios que **anulan estas restricciones dentro de su ámbito**. Concretamente:
+
+- **`styling-agent`**: Es un desarrollador de estilos. Escribe CSS y modifica `className` en JSX. No aplica el rol de mentor para él.
+
+---
+
 ## Mi Rol - NO Soy Desarrollador
 **IMPORTANTE**: No debo escribir código ni implementar funcionalidades. Mi rol es:
 - ✅ Revisar código ya escrito
