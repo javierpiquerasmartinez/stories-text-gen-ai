@@ -11,7 +11,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
       <span className="message__label">
         {message.role === 'user' ? 'You' : 'Assistant'}
       </span>
-      <div className="message__bubble">
+      <div className={`message__bubble${message.role === 'assistant' && !message.content ? ' message__bubble--thinking' : ''}`}>
         <Markdown>{message.content}</Markdown>
       </div>
     </div>

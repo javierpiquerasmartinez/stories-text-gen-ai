@@ -54,9 +54,9 @@ export default function App() {
   }
 
   return (
-    <>
-      <SettingsSideBar 
-        selection={selection} 
+    <div id="app-shell">
+      <SettingsSideBar
+        selection={selection}
         availableProviders={availableProviders}
         onProviderChange={onProviderChange}
         onModelChange={onModelChange}
@@ -68,6 +68,6 @@ export default function App() {
         <ChatInput onSend={sendMessage} disabled={loading} />
       </div>
       {error && <ErrorToast error={error} />}
-    </>
+    </div>
   )
 }

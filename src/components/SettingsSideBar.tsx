@@ -17,47 +17,72 @@ export default function SettingsSideBar({
 }) {
   return (
     <aside id="settings-sidebar">
-        <h2>Settings</h2>
-        <h3>AI Provider</h3>
-        <select 
-        id="provider-select" 
-        value={selection.provider}
-        onChange={(e) => onProviderChange(e.target.value as Provider)}>
-            {availableProviders.map((provider) => (
+      <h2>Settings</h2>
+
+      <div className="settings-section">
+        <label htmlFor="provider-select">Provider</label>
+        <select
+          id="provider-select"
+          value={selection.provider}
+          onChange={(e) => onProviderChange(e.target.value as Provider)}>
+          {availableProviders.map((provider) => (
             <option key={provider.id} value={provider.id}>
-                {provider.name}
+              {provider.name}
             </option>
-            ))}
+          ))}
         </select>
-        <h3>AI Model</h3>
-        <select 
-        id="model-select" 
-        value={selection.model}
-        onChange={(e) => onModelChange(e.target.value)}>
-            {availableProviders.find((p) => p.id === selection.provider)?.models.map((model) => (
+      </div>
+
+      <div className="settings-divider" />
+
+      <div className="settings-section">
+        <label htmlFor="model-select">Model</label>
+        <select
+          id="model-select"
+          value={selection.model}
+          onChange={(e) => onModelChange(e.target.value)}>
+          {availableProviders.find((p) => p.id === selection.provider)?.models.map((model) => (
             <option key={model.id} value={model.id}>
-                {model.name}
+              {model.name}
             </option>
-            ))}
+          ))}
         </select>
-        <h3>Temperature</h3>
-        <input
-        type="range"
-        id="temperature-slider"
-        min="0"
-        max="1"
-        step="0.1"
-        value={selection.temperature}
-        onChange={(e) => onTemperatureChange(parseFloat(e.target.value))}
-        />
-        <p>{selection.temperature.toFixed(1)}</p>
-        <h3>Stream</h3>
-        <input
-        type="checkbox"
-        id="stream-checkbox"
-        checked={selection.stream}
-        onChange={(e) => onStreamChange(e.target.checked)}
-        />
+      </div>
+
+      <div className="settings-divider" />
+
+      <div className="settings-section">
+        <label htmlFor="temperature-slider">Temperature</label>
+        <div className="settings-temperature-row">
+          <input
+            type="range"
+            id="temperature-slider"
+            min="0"
+            max="1"
+            step="0.1"
+            value={selection.temperature}
+            onChange={(e) => onTemperatureChange(parseFloat(e.target.value))}
+          />
+          <span className="settings-temperature-value">{selection.temperature.toFixed(1)}</span>
+        </div>
+      </div>
+
+      <div className="settings-divider" />
+
+      <div className="settings-section">
+        <label>Streaming</label>
+        <div className="settings-stream-row">
+          <input
+            type="checkbox"
+            id="stream-checkbox"
+            checked={selection.stream}
+            onChange={(e) => onStreamChange(e.target.checked)}
+          />
+          <label className="settings-stream-label" htmlFor="stream-checkbox">
+            Stream response
+          </label>
+        </div>
+      </div>
     </aside>
   )
 }

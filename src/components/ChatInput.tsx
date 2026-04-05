@@ -43,6 +43,7 @@ export default function ChatInput({ onSend, disabled }: ChatInputProps) {
           <span className="sr-only">Send</span>
         </button>
       </div>
+      <p className="input-hint">Enter to send &middot; Shift+Enter for new line</p>
     </footer>
   )
 }
