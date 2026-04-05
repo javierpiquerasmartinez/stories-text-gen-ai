@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 
 interface ChatInputProps {
   onSend: (content: string) => void,
@@ -8,30 +8,41 @@ interface ChatInputProps {
 export default function ChatInput({ onSend, disabled }: ChatInputProps) {
 
   const [userText, setUserText] = useState('')
+  const chatInputRef = useRef<HTMLTextAreaElement>(null)
 
   const handleSend = () => {
     const content = userText.trim()
     if (content) {
       onSend(content)
       setUserText('')
+      if (!chatInputRef.current) return
+      chatInputRef.current.style.height = 'auto'
     }
   }
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
       handleSend()
     }
   }
 
+  const handleTextchange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setUserText(e.target.value)
+    if (!chatInputRef.current) return
+    chatInputRef.current.style.height = 'auto'
+    chatInputRef.current.style.height = chatInputRef.current.scrollHeight + 'px'
+  }
+
   return (
     <footer id="chat-input-area">
       <div id="chat-input-wrapper">
         <textarea
+        ref={chatInputRef}
           id="chat-input"
           placeholder="Type your message…"
           value={userText}
-          onChange={(e) => setUserText(e.target.value)}
+          onChange={handleTextchange}
           onKeyDown={handleKeyDown}
           rows={1}
           disabled={disabled}
