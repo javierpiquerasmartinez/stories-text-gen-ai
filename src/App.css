@@ -191,3 +191,16 @@
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
+
+/* --- Settings Side Bar --- */
+#settings-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background: var(--code-bg);
+  border-right: 1px solid var(--border);
+  padding: 20px;
+  box-sizing: border-box;
+}
