@@ -63,7 +63,7 @@ export default function App() {
         onTemperatureChange={onTemperatureChange}
         onStreamChange={onStreamChange} />
       <div id="chat-layout">
-        <ChatHeader />
+        <ChatHeader isLoading={loading} />
         <ChatMessages messages={messages} />
         <ChatInput onSend={sendMessage} disabled={loading} />
       </div>
