@@ -1,4 +1,5 @@
 import type { Message } from '../types'
+import Markdown from 'react-markdown'
 
 interface ChatMessageProps {
   message: Message
@@ -11,9 +12,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         {message.role === 'user' ? 'You' : 'Assistant'}
       </span>
       <div className="message__bubble">
-        {message.content.split('\n\n').map((paragraph, i) => (
-          <p key={i}>{paragraph}</p>
-        ))}
+        <Markdown>{message.content}</Markdown>
       </div>
     </div>
   )
