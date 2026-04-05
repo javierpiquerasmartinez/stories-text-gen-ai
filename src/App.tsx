@@ -18,7 +18,7 @@ export default function App() {
     temperature: 0.7,
     stream: true,
   })
-  const {messages, loading, error, sendMessage} = useChat(selection)  
+  const {messages, loading, error, sendMessage, cleanContext} = useChat(selection)  
 
   const onProviderChange = (providerId: Provider) => {
     const providerConfig = availableProviders.find(p => p.id === providerId)
@@ -63,7 +63,7 @@ export default function App() {
         onTemperatureChange={onTemperatureChange}
         onStreamChange={onStreamChange} />
       <div id="chat-layout">
-        <ChatHeader isLoading={loading} />
+        <ChatHeader isLoading={loading} cleanContext={cleanContext} />
         <ChatMessages messages={messages} />
         <ChatInput onSend={sendMessage} disabled={loading} />
       </div>

@@ -1,8 +1,9 @@
 interface ChatHeaderProps {
-  isLoading?: boolean
+  isLoading?: boolean,
+  cleanContext: () => void,
 }
 
-export default function ChatHeader({ isLoading }: ChatHeaderProps) {
+export default function ChatHeader({ isLoading, cleanContext }: ChatHeaderProps) {
   return (
     <header id="chat-header">
       <div className={`chat-header__icon${isLoading ? ' chat-header__icon--loading' : ''}`}>🧑‍🚀</div>
@@ -11,6 +12,9 @@ export default function ChatHeader({ isLoading }: ChatHeaderProps) {
         <p>Text generation powered by AI</p>
       </div>
       <span className="chat-header__status">Online</span>
+      <button className="chat-header__new-chat" disabled={isLoading} onClick={cleanContext}>
+        Nuevo Chat
+      </button>
     </header>
   )
 }

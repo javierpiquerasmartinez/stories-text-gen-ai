@@ -16,6 +16,11 @@ export default function useChat(aiSelection: AISelection) {
         })
     }, [aiSelection.provider])
 
+    const cleanContext = () => {
+        if (loading) return
+        setMessages([])
+    }
+
     const sendMessage = async (content:string) => {
         if (loading) return
         setLoading(true)
@@ -38,5 +43,5 @@ export default function useChat(aiSelection: AISelection) {
         }
     }
 
-    return { messages, sendMessage, loading, error }
+    return { messages, sendMessage, loading, error, cleanContext }
 }
