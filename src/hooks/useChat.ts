@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react"
 import type { Message } from "../types"
-import { OpenAIProvider } from "../providers/openai"
 import { providerConfig } from "../config/ai"
+import { getProvider } from "../providers/factory"
 
 export default function useChat() {
     const [messages, setMessages] = useState<Message[]>([])
@@ -9,10 +9,12 @@ export default function useChat() {
     const [error, setError] = useState<string | null>(null)
     
     const provider = useMemo(() => {
-        if (providerConfig.provider === 'openai') {
-            return new OpenAIProvider()
-        }
-        throw new Error(`Unsupported provider: ${providerConfig.provider}`)
+        return getProvider({
+            provider: providerConfig.provider,
+            baseURL: providerConfig.baseURL,
+            apiKey: providerConfig.apiKey,
+            model: providerConfig.model
+        })
     }, [])
 
     const sendMessage = async (content:string) => {
