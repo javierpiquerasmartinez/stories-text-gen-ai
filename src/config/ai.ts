@@ -1,17 +1,24 @@
-import type { Provider } from "../types/ai";
+import type { AIProviderConfig } from "../types/ai";
 
-export const providerConfig: { 
-    provider: Provider; 
-    baseURL?: string;
-    model: string; 
-    temperature: number, 
-    stream: boolean,
-    apiKey: string
-    } = {
-    provider: 'openai',
-    // baseURL: 'https://api.groq.com/openai/v1',
-    model: 'gpt-4o-mini',
-    temperature: 0.7,
-    stream: true,
-    apiKey: import.meta.env.VITE_OPENAI_API_KEY
-}
+export const availableProviders: AIProviderConfig[] = [
+    {
+        id: 'openai',
+        name: 'OpenAI',
+        apiKeyId: 'OPENAI',
+        models: [
+            { id: 'gpt-5.4-nano', name: 'GPT-5.4 Nano' },
+            { id: 'gpt-5.4-mini', name: 'GPT-5.4 Mini' }
+        ]
+    },
+    {
+        id: 'groq',
+        name: 'Groq',
+        apiKeyId: 'GROQ',
+        models: [
+            { id: 'llama-3.1-8b-instant', name: 'Llama 3.1 8B Instant' },
+            { id: 'groq/compound', name: 'Compound' },
+            { id: 'groq/compound-mini', name: 'Compound Mini' }
+        ],
+        baseURL: 'https://api.groq.com/openai/v1'
+    }
+]

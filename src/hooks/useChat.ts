@@ -1,21 +1,20 @@
 import { useMemo, useState } from "react"
 import type { Message } from "../types"
-import { providerConfig } from "../config/ai"
 import { getProvider } from "../providers/factory"
+import type { AISelection } from "../types/ai"
 
-export default function useChat() {
+export default function useChat(aiSelection: AISelection) {
     const [messages, setMessages] = useState<Message[]>([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
     
     const provider = useMemo(() => {
         return getProvider({
-            provider: providerConfig.provider,
-            baseURL: providerConfig.baseURL,
-            apiKey: providerConfig.apiKey,
-            model: providerConfig.model
+            provider: aiSelection.provider,
+            baseURL: aiSelection.baseUrl,
+            apiKey: aiSelection.apiKey
         })
-    }, [])
+    }, [aiSelection.provider])
 
     const sendMessage = async (content:string) => {
         if (loading) return
@@ -24,7 +23,7 @@ export default function useChat() {
         const messagesForAPI: Message[] = [...messages, { id: crypto.randomUUID(), role: 'user', content }]
         setMessages(messagesForAPI)
         try {
-            const response = provider.sendMessage(messagesForAPI)
+            const response = provider.sendMessage({ messages: messagesForAPI, temperature: aiSelection.temperature, stream: aiSelection.stream, model: aiSelection.model })
             setMessages([...messagesForAPI, { id: crypto.randomUUID(), role: 'assistant', content: '' }])
             for await (const chunk of response) {
                 setMessages(prev => {

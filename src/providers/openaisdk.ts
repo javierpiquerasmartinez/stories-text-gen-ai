@@ -1,25 +1,22 @@
-import { providerConfig } from '../config/ai';
 import type { Message } from '../types';
 import type { AIProvider } from '../types/ai';
 import OpenAI from 'openai';
 
 export class OpenAISDKProvider implements AIProvider {
-    private model: string
     private client: OpenAI
 
-    constructor({apiKey, baseURL, model}: {apiKey:string, baseURL?:string, model:string}) {
-        this.model = model;
+    constructor({apiKey, baseURL}: {apiKey:string, baseURL?:string}) {
         this.client = new OpenAI({apiKey, baseURL, dangerouslyAllowBrowser: true});
     }
 
-    async *sendMessage(messages: Message[]): AsyncIterable<string> {
+    async *sendMessage({messages, temperature, stream, model}: {messages: Message[], temperature: number, stream: boolean, model: string}): AsyncIterable<string> {
         const messagesForAPI = messages.map(msg => ({content: msg.content, role: msg.role}));
         const apiRequestParams = {
-            model: this.model,
+            model: model,
             messages: messagesForAPI,
-            temperature: providerConfig.temperature,
+            temperature: temperature,
         };
-        if(!providerConfig.stream) {
+        if(!stream) {
             const response = await this.client.chat.completions.create({...apiRequestParams, stream: false});
             if(!response.choices[0].message.content) throw new Error('No content in OpenAI response');
             yield response.choices[0].message.content;
