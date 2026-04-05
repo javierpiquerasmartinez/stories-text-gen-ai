@@ -1,9 +1,10 @@
 interface ChatHeaderProps {
   isLoading?: boolean,
   cleanContext: () => void,
+  onToggleSidebar?: () => void,
 }
 
-export default function ChatHeader({ isLoading, cleanContext }: ChatHeaderProps) {
+export default function ChatHeader({ isLoading, cleanContext, onToggleSidebar }: ChatHeaderProps) {
   return (
     <header id="chat-header">
       <div className={`chat-header__icon${isLoading ? ' chat-header__icon--loading' : ''}`}>🧑‍🚀</div>
@@ -14,6 +15,9 @@ export default function ChatHeader({ isLoading, cleanContext }: ChatHeaderProps)
       <span className="chat-header__status">Online</span>
       <button className="chat-header__new-chat" disabled={isLoading} onClick={cleanContext}>
         Nuevo Chat
+      </button>
+      <button className="chat-header__settings-toggle" onClick={onToggleSidebar} aria-label="Toggle settings">
+        ⚙
       </button>
     </header>
   )

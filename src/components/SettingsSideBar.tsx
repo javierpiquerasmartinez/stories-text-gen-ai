@@ -1,23 +1,28 @@
 import type { AIProviderConfig, AISelection, Provider } from "../types/ai"
 
 export default function SettingsSideBar({
+    isOpen,
     selection,
     availableProviders,
     onProviderChange,
     onModelChange,
     onTemperatureChange,
-    onStreamChange
+    onStreamChange,
+    onClose
 }: {
+    isOpen?: boolean,
     selection: AISelection,
     availableProviders: AIProviderConfig[],
     onProviderChange: (providerId: Provider) => void,
     onModelChange: (modelId: string) => void,
     onTemperatureChange: (temperature: number) => void,
-    onStreamChange: (stream: boolean) => void
+    onStreamChange: (stream: boolean) => void,
+    onClose: () => void
 }) {
   return (
-    <aside id="settings-sidebar">
+    <aside id="settings-sidebar" className={isOpen ? 'is-open' : ''}>
       <h2>Settings</h2>
+      <button className="settings-sidebar__close" onClick={onClose}>X</button>
 
       <div className="settings-section">
         <label htmlFor="provider-select">Provider</label>
