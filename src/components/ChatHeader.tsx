@@ -1,7 +1,11 @@
-export default function ChatHeader() {
+interface ChatHeaderProps {
+  isLoading?: boolean
+}
+
+export default function ChatHeader({ isLoading }: ChatHeaderProps) {
   return (
     <header id="chat-header">
-      <div className="chat-header__icon">✦</div>
+      <div className={`chat-header__icon${isLoading ? ' chat-header__icon--loading' : ''}`}>🧑‍🚀</div>
       <div className="chat-header__text">
         <h1>Stories AI</h1>
         <p>Text generation powered by AI</p>

@@ -27,6 +27,12 @@
   30% { opacity: 1; transform: translateY(-4px); }
 }
 
+@keyframes astronaut-wobble {
+  0%   { transform: rotate(-20deg); }
+  50%  { transform: rotate(20deg); }
+  100% { transform: rotate(-20deg); }
+}
+
 @keyframes toast-in {
   from {
     opacity: 0;
@@ -214,6 +220,11 @@
     flex-shrink: 0;
     font-size: 17px;
     line-height: 1;
+
+    &.chat-header__icon--loading {
+      animation: astronaut-wobble 1.4s ease-in-out infinite;
+      transform-origin: center center;
+    }
   }
 
   .chat-header__text {
@@ -425,7 +436,7 @@
 
 #chat-input-wrapper {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   gap: 8px;
   background: var(--bg);
   border: 1.5px solid var(--border);
@@ -449,9 +460,13 @@
   font-size: 15px;
   color: var(--text-h);
   line-height: 150%;
-  max-height: 160px;
+  height: auto;
+  min-height: calc(15px * 1.5);
+  max-height: 200px;
   overflow-y: auto;
   scrollbar-width: none;
+  padding: 0;
+  vertical-align: top;
 
   &::-webkit-scrollbar {
     display: none;
