@@ -1,4 +1,4 @@
-import type { Message } from '.';
+import type { ImageMessage, Message, TextMessage } from '.';
 
 export type Provider = 'openai' | 'groq';
 
@@ -25,7 +25,10 @@ export interface AISelection {
 }
 
 export interface AIProvider {
-    sendMessage: ({messages, temperature, stream, model}: 
-        {messages: Message[], temperature: number, stream: boolean, model: string}) 
+    sendMessage: ({ messages, temperature, stream, model }:
+        { messages: TextMessage[], temperature: number, stream: boolean, model: string })
         => AsyncIterable<string>;
+    createImage: ({ prompt, temperature, stream, model }:
+        { prompt: string, temperature: number, stream: boolean, model: string })
+        => Promise<ImageMessage>;
 }
