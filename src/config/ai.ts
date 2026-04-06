@@ -7,7 +7,8 @@ export const availableProviders: AIProviderConfig[] = [
         apiKeyId: 'OPENAI',
         models: [
             { id: 'gpt-5.4-nano', name: 'GPT-5.4 Nano' },
-            { id: 'gpt-5.4-mini', name: 'GPT-5.4 Mini' }
+            { id: 'gpt-5.4-mini', name: 'GPT-5.4 Mini' },
+            { id: 'dall-e-3', name: 'DALL-E 3' }
         ]
     },
     {

@@ -16,7 +16,7 @@ export interface ImageMessage extends BaseMessage {
 
 export interface ImgMessageContent {
   url: string
-  b64_json: string
+  b64_json?: string
   config: {
     revised_prompt?: string
     output_format?: string

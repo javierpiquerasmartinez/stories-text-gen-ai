@@ -33,12 +33,11 @@ export class OpenAISDKProvider implements AIProvider {
         const apiRequestParams = {
             model: model,
             prompt: prompt,
-            temperature: temperature,
             n: 1
         }
         const response = await this.client.images.generate({ ...apiRequestParams });
         if (!response.data || response.data.length === 0) throw new Error('No data in OpenAI image response');
-        if (!response.data[0].url || !response.data[0].b64_json) throw new Error('Missing url or b64_json in OpenAI image response');
+        if (!response.data[0].url) throw new Error('Missing url in OpenAI image response');
         return {
             id: crypto.randomUUID(),
             role: 'assistant' as const,

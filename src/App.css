@@ -411,6 +411,13 @@
       padding: 0;
     }
   }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+  }
 }
 
 /* User message — right aligned */
