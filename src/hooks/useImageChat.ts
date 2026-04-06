@@ -27,12 +27,14 @@ export default function useImageChat(aiSelection: AISelection) {
         setLoading(true)
         setError(null)
         const messagesForAPI: Message[] = [...messages, { id: crypto.randomUUID(), role: 'user', content, type: 'text' }]
-        setMessages(messagesForAPI)
+        setMessages([...messagesForAPI, { id: crypto.randomUUID(), role: 'assistant', content: '', type: 'text' }])
+
         try {
             const response = await provider.createImage({ prompt: content, temperature: aiSelection.temperature, stream: false, model: aiSelection.model })
             setMessages([...messagesForAPI, response])
         } catch (err) {
             setError('Failed to send message: ' + (err instanceof Error ? err.message : 'Unknown error'))
+            setMessages(p => p.slice(0, -1))
         } finally {
             setLoading(false)
         }
