@@ -1,8 +1,9 @@
 interface ChatHeaderProps {
   onToggleSidebar?: () => void,
+  onCleanContext?: () => void,
 }
 
-export default function ChatHeader({ onToggleSidebar }: ChatHeaderProps) {
+export default function ChatHeader({ onToggleSidebar, onCleanContext }: ChatHeaderProps) {
   return (
     <header id="chat-header">
       <div className="chat-header__icon">🧑‍🚀</div>
@@ -10,7 +11,9 @@ export default function ChatHeader({ onToggleSidebar }: ChatHeaderProps) {
         <h1>Stories AI</h1>
         <p>Text generation powered by AI</p>
       </div>
-      <span className="chat-header__status">Online</span>
+      <button className="chat-header__clear-btn" onClick={onCleanContext} aria-label="Clear chat">
+        ↺
+      </button>
       <button className="chat-header__settings-toggle" onClick={onToggleSidebar} aria-label="Toggle settings">
         ⚙
       </button>

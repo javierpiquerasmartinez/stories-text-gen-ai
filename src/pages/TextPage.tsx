@@ -7,14 +7,16 @@ import useChat from '../hooks/useChat'
 import ErrorToast from '../components/ErrorToast'
 import useChatSettings from '../hooks/useChatSettings'
 import { useSidebar } from '../context/SidebarContext'
+import ChatHeader from '../components/ChatHeader'
 
 export default function TextPage() {
     const { sidebarOpen, setSidebarOpen } = useSidebar()
     const { selection, onProviderChange, onModelChange, onTemperatureChange, onStreamChange } = useChatSettings()
-    const { messages, loading, error, sendMessage } = useChat(selection)
+    const { messages, loading, error, sendMessage, cleanContext } = useChat(selection)
 
     return (
         <>
+            <ChatHeader onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} onCleanContext={cleanContext} />
             <SettingsSideBar
                 isOpen={sidebarOpen}
                 selection={selection}
