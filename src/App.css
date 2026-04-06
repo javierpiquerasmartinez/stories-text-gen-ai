@@ -72,7 +72,12 @@
 /* ── Root layout ──────────────────────────────────────── */
 
 #app-shell {
-  display: flex;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "header header"
+    "sidebar main";
   height: 100svh;
   overflow: hidden;
   position: relative;
@@ -81,10 +86,11 @@
 /* ── Settings Sidebar ─────────────────────────────────── */
 
 #settings-sidebar {
+  grid-area: sidebar;
   position: relative;
   width: 260px;
   flex-shrink: 0;
-  height: 100svh;
+  height: 100%;
   background: var(--bg-elevated);
   border-right: 1px solid var(--border);
   padding: 28px 20px 24px;
@@ -209,10 +215,10 @@
 /* ── Chat Layout ──────────────────────────────────────── */
 
 #chat-layout {
-  flex: 1;
+  grid-area: main;
   display: flex;
   flex-direction: column;
-  height: 100svh;
+  height: 100%;
   overflow: hidden;
   min-width: 0;
 }
@@ -220,9 +226,9 @@
 /* ── Header ──────────────────────────────────────────── */
 
 #chat-header {
+  grid-area: header;
   padding: 18px 28px 16px;
   border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
   background: var(--bg-elevated);
   display: flex;
   align-items: center;
@@ -619,6 +625,14 @@
 
 @media (max-width: 640px) {
 
+  /* Collapse to single-column grid on mobile — sidebar becomes a fixed overlay */
+  #app-shell {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "main";
+  }
+
   /* Sidebar becomes a fixed overlay panel */
   #settings-sidebar {
     position: fixed;
@@ -689,8 +703,10 @@
     pointer-events: auto;
   }
 
-  /* Chat layout takes full width on mobile */
+  /* Chat layout takes full width on mobile — sidebar is fixed overlay */
   #chat-layout {
+    grid-area: main;
+    grid-column: 1 / -1;
     width: 100%;
     min-width: 0;
   }
