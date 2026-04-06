@@ -1,4 +1,4 @@
-import type { ImageMessage, Message, TextMessage } from '.';
+import type { ImageMessage, TextMessage } from '.';
 
 export type Provider = 'openai' | 'groq';
 
