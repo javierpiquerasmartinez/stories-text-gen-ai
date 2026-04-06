@@ -10,8 +10,9 @@ import { useSidebar } from '../context/SidebarContext'
 import ChatHeader from '../components/ChatHeader'
 
 export default function ImagePage() {
+
     const { sidebarOpen, setSidebarOpen } = useSidebar()
-    const { selection, onProviderChange, onModelChange, onTemperatureChange, onStreamChange } = useChatSettings()
+    const { selection, onProviderChange, onModelChange, onTemperatureChange, onStreamChange } = useChatSettings({ availableProviders: availableProviders.image })
     const { messages, loading, error, sendMessage, cleanContext } = useImageChat(selection)
 
     return (
@@ -20,7 +21,7 @@ export default function ImagePage() {
             <SettingsSideBar
                 isOpen={sidebarOpen}
                 selection={selection}
-                availableProviders={availableProviders}
+                availableProviders={availableProviders.image}
                 onProviderChange={onProviderChange}
                 onModelChange={onModelChange}
                 onTemperatureChange={onTemperatureChange}

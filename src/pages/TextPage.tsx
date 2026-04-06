@@ -11,7 +11,7 @@ import ChatHeader from '../components/ChatHeader'
 
 export default function TextPage() {
     const { sidebarOpen, setSidebarOpen } = useSidebar()
-    const { selection, onProviderChange, onModelChange, onTemperatureChange, onStreamChange } = useChatSettings()
+    const { selection, onProviderChange, onModelChange, onTemperatureChange, onStreamChange } = useChatSettings({ availableProviders: availableProviders.text })
     const { messages, loading, error, sendMessage, cleanContext } = useChat(selection)
 
     return (
@@ -20,7 +20,7 @@ export default function TextPage() {
             <SettingsSideBar
                 isOpen={sidebarOpen}
                 selection={selection}
-                availableProviders={availableProviders}
+                availableProviders={availableProviders.text}
                 onProviderChange={onProviderChange}
                 onModelChange={onModelChange}
                 onTemperatureChange={onTemperatureChange}

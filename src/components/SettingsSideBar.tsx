@@ -1,23 +1,23 @@
 import type { AIProviderConfig, AISelection, Provider } from "../types/ai"
 
 export default function SettingsSideBar({
-    isOpen,
-    selection,
-    availableProviders,
-    onProviderChange,
-    onModelChange,
-    onTemperatureChange,
-    onStreamChange,
-    onClose
+  isOpen,
+  selection,
+  availableProviders,
+  onProviderChange,
+  onModelChange,
+  onTemperatureChange,
+  onStreamChange,
+  onClose
 }: {
-    isOpen?: boolean,
-    selection: AISelection,
-    availableProviders: AIProviderConfig[],
-    onProviderChange: (providerId: Provider) => void,
-    onModelChange: (modelId: string) => void,
-    onTemperatureChange: (temperature: number) => void,
-    onStreamChange: (stream: boolean) => void,
-    onClose: () => void
+  isOpen?: boolean,
+  selection: AISelection,
+  availableProviders: AIProviderConfig[],
+  onProviderChange: (providerId: Provider) => void,
+  onModelChange: (modelId: string) => void,
+  onTemperatureChange: (temperature: number) => void,
+  onStreamChange: (stream: boolean) => void,
+  onClose: () => void
 }) {
   return (
     <aside id="settings-sidebar" className={isOpen ? 'is-open' : ''}>
