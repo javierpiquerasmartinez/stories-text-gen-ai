@@ -25,6 +25,17 @@ export default function SettingsSideBar({
       <button className="settings-sidebar__close" onClick={onClose}>X</button>
 
       <div className="settings-section">
+        <label htmlFor="system-prompt-input">System prompt</label>
+        <textarea
+          id="system-prompt-input"
+          className="settings-system-prompt"
+          rows={4}
+          placeholder="You are a helpful assistant..."
+        />
+      </div>
+      <div className="settings-divider" />
+
+      <div className="settings-section">
         <label htmlFor="provider-select">Provider</label>
         <select
           id="provider-select"

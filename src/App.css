@@ -89,7 +89,7 @@
 #settings-sidebar {
   grid-area: sidebar;
   position: relative;
-  width: 260px;
+  width: 300px;
   flex-shrink: 0;
   height: 100%;
   background: var(--bg-elevated);
@@ -205,6 +205,30 @@
   accent-color: var(--accent);
   cursor: pointer;
   flex-shrink: 0;
+}
+
+.settings-system-prompt {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-h);
+  font: inherit;
+  font-size: 14px;
+  resize: none;
+  padding: 8px 10px;
+  line-height: 1.5;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent-border);
+    box-shadow: 0 0 0 3px var(--accent-bg);
+  }
 }
 
 .settings-divider {
@@ -691,7 +715,6 @@
     position: fixed;
     inset: 0 0 0 0;
     width: 100%;
-    max-width: 320px;
     z-index: 50;
     border-right: 1px solid var(--border);
     box-shadow: var(--shadow-lg);
