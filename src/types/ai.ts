@@ -25,8 +25,8 @@ export interface AISelection {
 }
 
 export interface AIProvider {
-    sendMessage: ({ messages, temperature, stream, model }:
-        { messages: TextMessage[], temperature: number, stream: boolean, model: string })
+    sendMessage: ({ prompt, messages, temperature, stream, model }:
+        { prompt?: string, messages: TextMessage[], temperature: number, stream: boolean, model: string })
         => AsyncIterable<string>;
     createImage: ({ prompt, temperature, stream, model }:
         { prompt: string, temperature: number, stream: boolean, model: string })

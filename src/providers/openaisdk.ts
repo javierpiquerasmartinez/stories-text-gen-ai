@@ -9,11 +9,12 @@ export class OpenAISDKProvider implements AIProvider {
         this.client = new OpenAI({ apiKey, baseURL, dangerouslyAllowBrowser: true });
     }
 
-    async *sendMessage({ messages, temperature, stream, model }: { messages: TextMessage[], temperature: number, stream: boolean, model: string }): AsyncIterable<string> {
+    async *sendMessage({ prompt, messages, temperature, stream, model }: { prompt?: string, messages: TextMessage[], temperature: number, stream: boolean, model: string }): AsyncIterable<string> {
+        const systemMessage = prompt ? [{ role: 'system' as const, content: prompt }] : [];
         const messagesForAPI = messages.map(msg => ({ content: msg.content, role: msg.role }));
         const apiRequestParams = {
             model: model,
-            messages: messagesForAPI,
+            messages: [...systemMessage, ...messagesForAPI],
             temperature: temperature,
         };
         if (!stream) {

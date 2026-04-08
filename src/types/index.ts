@@ -1,6 +1,6 @@
 interface BaseMessage {
   id: string
-  role: 'user' | 'assistant'
+  role: 'user' | 'assistant' | 'system'
   type: 'text' | 'image'
 }
 

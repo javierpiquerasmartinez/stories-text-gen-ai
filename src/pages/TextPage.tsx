@@ -11,8 +11,8 @@ import ChatHeader from '../components/ChatHeader'
 
 export default function TextPage() {
     const { sidebarOpen, setSidebarOpen } = useSidebar()
-    const { selection, onProviderChange, onModelChange, onTemperatureChange, onStreamChange } = useChatSettings({ availableProviders: availableProviders.text })
-    const { messages, loading, error, setError, sendMessage, cleanContext } = useChat(selection)
+    const { selection, systemPrompt, onSystemPromptChange, onProviderChange, onModelChange, onTemperatureChange, onStreamChange } = useChatSettings({ availableProviders: availableProviders.text })
+    const { messages, loading, error, setError, sendMessage, cleanContext } = useChat({ aiSelection: selection, systemPrompt: systemPrompt })
 
     return (
         <>
@@ -21,6 +21,12 @@ export default function TextPage() {
                 isOpen={sidebarOpen}
                 selection={selection}
                 availableProviders={availableProviders.text}
+                features={{
+                    systemPrompt: {
+                        value: systemPrompt,
+                        onChange: onSystemPromptChange
+                    }
+                }}
                 onProviderChange={onProviderChange}
                 onModelChange={onModelChange}
                 onTemperatureChange={onTemperatureChange}

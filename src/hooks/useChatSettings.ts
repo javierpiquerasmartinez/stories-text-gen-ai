@@ -11,7 +11,11 @@ export default function useChatSettings({ availableProviders }: { availableProvi
     temperature: 0.7,
     stream: true,
   })
+  const [systemPrompt, setSystemPrompt] = useState<string>('')
 
+  const onSystemPromptChange = (prompt: string) => {
+    setSystemPrompt(prompt)
+  }
 
   const onProviderChange = (providerId: Provider) => {
     const providerConfig = availableProviders.find(p => p.id === providerId)
@@ -48,6 +52,8 @@ export default function useChatSettings({ availableProviders }: { availableProvi
 
   return {
     selection,
+    systemPrompt,
+    onSystemPromptChange,
     onProviderChange,
     onModelChange,
     onTemperatureChange,

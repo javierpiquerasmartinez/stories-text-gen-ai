@@ -3,7 +3,7 @@ import type { TextMessage } from "../types"
 import { getProvider } from "../providers/factory"
 import type { AISelection } from "../types/ai"
 
-export default function useChat(aiSelection: AISelection) {
+export default function useChat({ aiSelection, systemPrompt }: { aiSelection: AISelection, systemPrompt: string }) {
     const [messages, setMessages] = useState<TextMessage[]>([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
@@ -28,7 +28,7 @@ export default function useChat(aiSelection: AISelection) {
         const messagesForAPI: TextMessage[] = [...messages, { id: crypto.randomUUID(), role: 'user', content, type: 'text' }]
         setMessages([...messagesForAPI, { id: crypto.randomUUID(), role: 'assistant', content: '', type: 'text' }])
         try {
-            const response = provider.sendMessage({ messages: messagesForAPI, temperature: aiSelection.temperature, stream: aiSelection.stream, model: aiSelection.model })
+            const response = provider.sendMessage({ prompt: systemPrompt, messages: messagesForAPI, temperature: aiSelection.temperature, stream: aiSelection.stream, model: aiSelection.model })
             for await (const chunk of response) {
                 setMessages(prev => {
                     const lastMessage = prev[prev.length - 1]
