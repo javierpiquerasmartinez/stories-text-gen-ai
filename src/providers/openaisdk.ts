@@ -29,7 +29,7 @@ export class OpenAISDKProvider implements AIProvider {
         }
     }
 
-    async createImage({ prompt, temperature, stream, model }: { prompt: string, temperature: number, stream: boolean, model: string }) {
+    async createImage({ prompt, model }: { prompt: string, temperature?: number, stream?: boolean, model: string }) {
         const apiRequestParams = {
             model: model,
             prompt: prompt,

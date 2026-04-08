@@ -14,7 +14,7 @@ export default function useChat(aiSelection: AISelection) {
             baseURL: aiSelection.baseUrl,
             apiKey: aiSelection.apiKey
         })
-    }, [aiSelection.provider])
+    }, [aiSelection])
 
     const cleanContext = () => {
         if (loading) return
