@@ -26,10 +26,9 @@ export default function useChat(aiSelection: AISelection) {
         setLoading(true)
         setError(null)
         const messagesForAPI: TextMessage[] = [...messages, { id: crypto.randomUUID(), role: 'user', content, type: 'text' }]
-        setMessages(messagesForAPI)
+        setMessages([...messagesForAPI, { id: crypto.randomUUID(), role: 'assistant', content: '', type: 'text' }])
         try {
             const response = provider.sendMessage({ messages: messagesForAPI, temperature: aiSelection.temperature, stream: aiSelection.stream, model: aiSelection.model })
-            setMessages([...messagesForAPI, { id: crypto.randomUUID(), role: 'assistant', content: '', type: 'text' }])
             for await (const chunk of response) {
                 setMessages(prev => {
                     const lastMessage = prev[prev.length - 1]
@@ -38,10 +37,11 @@ export default function useChat(aiSelection: AISelection) {
             }
         } catch (err) {
             setError('Failed to send message: ' + (err instanceof Error ? err.message : 'Unknown error'))
+            setMessages(p => p.slice(0, -1))
         } finally {
             setLoading(false)
         }
     }
 
-    return { messages, sendMessage, loading, error, cleanContext }
+    return { messages, sendMessage, loading, error, setError, cleanContext }
 }

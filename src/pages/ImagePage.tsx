@@ -13,7 +13,7 @@ export default function ImagePage() {
 
     const { sidebarOpen, setSidebarOpen } = useSidebar()
     const { selection, onProviderChange, onModelChange, onTemperatureChange, onStreamChange } = useChatSettings({ availableProviders: availableProviders.image })
-    const { messages, loading, error, sendMessage, cleanContext } = useImageChat(selection)
+    const { messages, loading, error, setError, sendMessage, cleanContext } = useImageChat(selection)
 
     return (
         <>
@@ -31,7 +31,7 @@ export default function ImagePage() {
                 <ChatMessages messages={messages} />
                 <ChatInput onSend={sendMessage} disabled={loading} />
             </div>
-            {error && <ErrorToast error={error} />}
+            {error && <ErrorToast error={error} closeTimeout={5000} onClose={() => setError(null)} />}
         </>
     )
 }

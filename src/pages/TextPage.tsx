@@ -12,7 +12,7 @@ import ChatHeader from '../components/ChatHeader'
 export default function TextPage() {
     const { sidebarOpen, setSidebarOpen } = useSidebar()
     const { selection, onProviderChange, onModelChange, onTemperatureChange, onStreamChange } = useChatSettings({ availableProviders: availableProviders.text })
-    const { messages, loading, error, sendMessage, cleanContext } = useChat(selection)
+    const { messages, loading, error, setError, sendMessage, cleanContext } = useChat(selection)
 
     return (
         <>
@@ -30,7 +30,7 @@ export default function TextPage() {
                 <ChatMessages messages={messages} />
                 <ChatInput onSend={sendMessage} disabled={loading} />
             </div>
-            {error && <ErrorToast error={error} />}
+            {error && <ErrorToast error={error} closeTimeout={5000} onClose={() => setError(null)} />}
         </>
     )
 }

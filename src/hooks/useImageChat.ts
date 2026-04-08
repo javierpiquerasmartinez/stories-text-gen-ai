@@ -40,5 +40,5 @@ export default function useImageChat(aiSelection: AISelection) {
         }
     }
 
-    return { messages, loading, error, cleanContext, sendMessage }
+    return { messages, loading, error, setError, cleanContext, sendMessage }
 }
