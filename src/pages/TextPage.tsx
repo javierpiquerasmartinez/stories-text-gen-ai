@@ -24,7 +24,8 @@ export default function TextPage() {
                 features={{
                     systemPrompt: {
                         value: systemPrompt,
-                        onChange: onSystemPromptChange
+                        onChange: onSystemPromptChange,
+                        disabled: messages.length > 0
                     }
                 }}
                 onProviderChange={onProviderChange}

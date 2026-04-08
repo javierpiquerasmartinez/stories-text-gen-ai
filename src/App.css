@@ -222,12 +222,21 @@
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color 0.2s, box-shadow 0.2s, opacity 0.2s, background 0.2s;
 
   &:focus {
     outline: none;
     border-color: var(--accent-border);
     box-shadow: 0 0 0 3px var(--accent-bg);
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    background: var(--bg);
+    border-color: var(--border-subtle, var(--border));
+    color: var(--text);
+    box-shadow: none;
   }
 }
 

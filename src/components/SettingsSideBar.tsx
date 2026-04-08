@@ -4,6 +4,7 @@ export interface SidebarFeatures {
   systemPrompt?: {
     value: string;
     onChange: (value: string) => void;
+    disabled?: boolean;
   }
 }
 
@@ -47,6 +48,7 @@ export default function SettingsSideBar({
                 value={systemPromptFeature.value}
                 onChange={(e) => systemPromptFeature.onChange(e.target.value)}
                 placeholder="You are a helpful assistant..."
+                disabled={systemPromptFeature.disabled}
               />
             </div>
             <div className="settings-divider" />
